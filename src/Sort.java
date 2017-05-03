@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -12,14 +14,14 @@ public class Sort {
 		Load.initialize(path);
 
 		String[] s;
-		int n = 0;
+		int n=0;
 		while ((s = Load.getNextChunk()) != null) {
 			Arrays.sort(s);
 //			for (String str : s) {
 //				System.out.println(str);
 //			}
 //			System.out.println("---");
-			Save.saveChunk(s, n);
+			Save.saveChunk(s,n);
 			n++;
 		}
 
@@ -27,58 +29,6 @@ public class Sort {
 
 	}
 
-	public static void merge(String sa, String sb) {
-		File path1 = new File(sa);
-		File path2 = new File(sb);
-		String s1;
-		String s2;
 
-		if (path1.exists() && path1.isFile() && path2.exists() && path2.isFile()) {
-			try {
-				BufferedReader b1 = new BufferedReader(new FileReader(sa));
-				BufferedReader b2 = new BufferedReader(new FileReader(sb));
 
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks" + File.separator + sa.concat(sb)));
-
-				try {
-					s1 = b1.readLine();
-					s2 = b2.readLine();
-
-					while (s1 != null && s2 != null) {
-						switch (s1.compareTo(s2)) {
-							case 0:
-								bufferedWriter.write(s1);
-								bufferedWriter.newLine();
-								s1 = b1.readLine();
-								break;
-							case 1:
-								bufferedWriter.write(s1);
-								bufferedWriter.newLine();
-								s1 = b1.readLine();
-							case -1:
-								bufferedWriter.write(s2);
-								bufferedWriter.newLine();
-								s2 = b2.readLine();
-						}
-					}
-					while (s1 != null) {
-						bufferedWriter.write(s1);
-						bufferedWriter.newLine();
-						s1 = b1.readLine();
-					}
-					while (s2 != null) {
-						bufferedWriter.write(s2);
-						bufferedWriter.newLine();
-						s2 = b2.readLine();
-					}
-					bufferedWriter.close();
-
-				} catch (IOException e) {
-
-				}
-			} catch (IOException e) {
-
-			}
-		}
-	}
 }
