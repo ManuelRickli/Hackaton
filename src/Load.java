@@ -25,6 +25,14 @@ public class Load {
 		return true;
 	}
 
+	public static void close() {
+		try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static String[] getNextChunk() {
 		String line;
 		n = 0;

@@ -14,13 +14,18 @@ public class Sort {
 		Load.initialize(path);
 
 		String[] s;
+		int n=0;
 		while ((s = Load.getNextChunk()) != null) {
 			Arrays.sort(s);
-			for (String str : s) {
-				System.out.println(str);
-			}
-			System.out.println("---");
+//			for (String str : s) {
+//				System.out.println(str);
+//			}
+//			System.out.println("---");
+			Save.saveChunk(s,n);
+			n++;
 		}
+
+		Load.close();
 
 	}
 

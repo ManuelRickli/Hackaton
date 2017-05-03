@@ -5,11 +5,12 @@ public class Start {
 
 	public static void main(String[] args) {
 
-		if (args != null) {
-			for (String s : args) {
-				Sort.sort(s);
-			}
-		}
+		String path = "test";
+
+		if ((args != null) && (args.length > 0)) path = args[0];
+
+		Sort.sort(path);
+
 
 	}
 
