@@ -1,11 +1,7 @@
 import java.io.*;
-import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * Created by michael1337 on 03/05/17.
  */
@@ -35,73 +31,60 @@ public class Sort {
 		}
 
 		Load.close();
+		merge("tmp_chunks/0", "tmp_chunks/1");
 	}
 
 	public static void merge(String sa, String sb) {
+		String con = sa.concat(sb).replaceAll("\\D", "");
 
-		File path1 = new File(sa);
-		File path2 = new File(sb);
 		String s1;
 		String s2;
 
-		if (path1.exists() && path1.isFile() && path2.exists() && path2.isFile())
+		try {
+			BufferedReader b1 = new BufferedReader(new FileReader(sa));
+			BufferedReader b2 = new BufferedReader(new FileReader(sb));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks"+File.separator+con));
 
 			try {
-				BufferedReader b1 = new BufferedReader(new FileReader(sa));
-				BufferedReader b2 = new BufferedReader(new FileReader(sb));
+				s1 = b1.readLine();
+				s2 = b2.readLine();
 
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks" + File.separator + sa.concat(sb)));
-
-				try {
-					s1 = b1.readLine();
-					s2 = b2.readLine();
-
-					while (s1 != null && s2 != null) {
-						switch (s1.compareToIgnoreCase(s2)) {
-							case 0:
-								bufferedWriter.write(s1);
-								bufferedWriter.newLine();
-								s1 = b1.readLine();
-								break;
-							case 1:
-								bufferedWriter.write(s1);
-								bufferedWriter.newLine();
-								s1 = b1.readLine();
-								break;
-							case -1:
-								bufferedWriter.write(s2);
-								bufferedWriter.newLine();
-								s2 = b2.readLine();
-								break;
-						}
-					}
-					while (s1 != null) {
+				while (s1!=null && s2!=null) {
+					if (s1.compareTo(s2) < 0) {
 						bufferedWriter.write(s1);
 						bufferedWriter.newLine();
 						s1 = b1.readLine();
-					}
-					while (s2 != null) {
+					} else {
 						bufferedWriter.write(s2);
 						bufferedWriter.newLine();
 						s2 = b2.readLine();
 					}
+				}
+				while (s1 != null) {
+					bufferedWriter.write(s1);
+					bufferedWriter.newLine();
+					s1 = b1.readLine();
+				}
+				while (s2 != null) {
+					bufferedWriter.write(s2);
+					bufferedWriter.newLine();
+					s2 = b2.readLine();
+				}
 
-					bufferedWriter.close();
-					b1.close();
-					b2.close();
+				bufferedWriter.close();
 
-					try {
-						Files.delete(Paths.get(sa));
-						Files.delete(Paths.get(sb));
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
+				try {
+					Files.delete(Paths.get(sa));
+					Files.delete(Paths.get(sb));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
