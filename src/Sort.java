@@ -13,7 +13,7 @@ public class Sort {
 	 * Main entry point to sort the big data.
 	 * First slices the big data into biteable chunks and sorts them.
 	 * Then it merges all the chunks to create a new sorted big file.
-	 * @param path the path to save the file to.
+	 * @param path the path of the file with the unsorted big data.
 	 */
 	public static void sort(String path) {
 

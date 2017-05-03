@@ -16,6 +16,10 @@ public class Start {
 
 		Sort.sort(path);
 
+		Index root = new Index("",0,-1);
+
+		IndexBuilder.build(root);
+
 	}
 
 }
