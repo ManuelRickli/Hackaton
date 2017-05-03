@@ -5,7 +5,7 @@ import java.io.*;
  */
 public class Load {
 
-	private static final int chunk=3;
+	private static final int chunk=7;
 
 	private static int n=0;
 	private static BufferedReader bufferedReader;
