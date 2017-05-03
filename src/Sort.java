@@ -9,6 +9,12 @@ import java.util.Collections;
  */
 public class Sort {
 
+	/**
+	 * Main entry point to sort the big data.
+	 * First slices the big data into biteable chunks and sorts them.
+	 * Then it merges all the chunks to create a new sorted big file.
+	 * @param path the path to save the file to.
+	 */
 	public static void sort(String path) {
 
 		Load.initialize(path);
@@ -21,7 +27,7 @@ public class Sort {
 //				System.out.println(str);
 //			}
 //			System.out.println("---");
-			Save.saveChunk(s,n);
+			Save.saveChunk(s,String.valueOf(n));
 			n++;
 		}
 

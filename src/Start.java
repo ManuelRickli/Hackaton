@@ -3,6 +3,11 @@
  */
 public class Start {
 
+	/**
+	 * Start this class to run the programm.
+	 * When no arguments are applied, the file "test" will be read out.
+	 * @param args file you want to work with
+	 */
 	public static void main(String[] args) {
 
 		String path = "test";
@@ -10,7 +15,6 @@ public class Start {
 		if ((args != null) && (args.length > 0)) path = args[0];
 
 		Sort.sort(path);
-
 
 	}
 

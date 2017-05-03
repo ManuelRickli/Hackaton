@@ -10,6 +10,11 @@ public class Load {
 	private static int n=0;
 	private static BufferedReader bufferedReader;
 
+	/**
+	 * This method initializes the reading of the big data.
+	 * @param path path of file to read
+	 * @return false if something went wrong
+	 */
 	public static boolean initialize(String path) {
 
 		File file = new File(path);
@@ -25,6 +30,9 @@ public class Load {
 		return true;
 	}
 
+	/**
+	 * Please don't forget to close all the streams after using them.
+	 */
 	public static void close() {
 		try {
 			bufferedReader.close();
@@ -33,6 +41,10 @@ public class Load {
 		}
 	}
 
+	/**
+	 * Bites the next chunk of length chunk from the big data.
+	 * @return the biteable chunk you might want to sort.
+	 */
 	public static String[] getNextChunk() {
 		String line;
 		n = 0;
