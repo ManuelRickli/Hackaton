@@ -4,3 +4,5 @@
 *.class
 
 tmp_chunks/
+
+urls-sample\.txt
