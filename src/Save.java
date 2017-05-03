@@ -8,10 +8,15 @@ import java.io.IOException;
  */
 public class Save {
 
-	public static void saveChunk(String[] chunk,int n) {
+	/**
+	 * Save a chunk into the folder "tmp_chunks" with the name n.
+	 * @param chunk the (hopefully) sorted array to save.
+	 * @param n the name of the file.
+	 */
+	public static void saveChunk(String[] chunk,String n) {
 		if (chunk!=null) {
 			try {
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks"+ File.separator+String.valueOf(n)));
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks"+ File.separator+n));
 
 				if (bufferedWriter != null) {
 					for (String s : chunk) {

@@ -3,6 +3,11 @@
  */
 public class Start {
 
+	/**
+	 * Start this class to run the programm.
+	 * When no arguments are applied, the file "test" will be read out.
+	 * @param args file you want to work with
+	 */
 	public static void main(String[] args) {
 
 		String path = "test";
@@ -11,6 +16,9 @@ public class Start {
 
 		Sort.sort(path);
 
+		Index root = new Index("",0,-1);
+
+		IndexBuilder.build(root);
 
 	}
 
