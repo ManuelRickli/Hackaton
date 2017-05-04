@@ -5,8 +5,6 @@ import java.io.*;
  */
 public class Load {
 
-	private static final int chunk=7;
-
 	private static int n=0;
 	private static BufferedReader bufferedReader;
 
@@ -48,15 +46,15 @@ public class Load {
 	public static String[] getNextChunk() {
 		String line;
 		n = 0;
-		String[] s = new String[chunk];
+		String[] s = new String[Start.CHUNKSIZE];
 
 		try {
-			while (((line = bufferedReader.readLine()) != null) && (n<chunk)) {
+			while (((line = bufferedReader.readLine()) != null) && (n<Start.CHUNKSIZE)) {
 				s[n] = line;
 				n++;
 			}
 
-			if ((n<chunk)&&(n>0)) {
+			if ((n<Start.CHUNKSIZE)&&(n>0)) {
 				String[] newS = new String[n];
 				for (int i=0; i<n; i++) { newS[i] = s[i]; }
 				return newS;
