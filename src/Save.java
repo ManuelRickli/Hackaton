@@ -16,14 +16,14 @@ public class Save {
 	public static void saveChunk(String[] chunk,String n) {
 		if (chunk!=null) {
 			try {
-				File folder = new File("tmp_chunks");
+				File folder = new File(Start.FOLDER);
 				if (!folder.exists()) {
 					try {
 						folder.mkdir();
 					} catch (Exception e) {}
 				}
 
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("tmp_chunks"+ File.separator+n));
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+n));
 
 				if (bufferedWriter != null) {
 					for (String s : chunk) {

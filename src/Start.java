@@ -5,7 +5,8 @@ public class Start {
 
 	public static final String FOLDER = "tmp_chunks";
 	public static final int MAXINDEXSIZE = 3;
-	public static final int CHUNKSIZE = 3;//1000000
+	public static final int CHUNKSIZE = 5;//1000000
+	public static final int MAXCHUNKS = 10; // only for testing!
 
 	/**
 	 * Start this class to run the programm.

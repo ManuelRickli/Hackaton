@@ -29,7 +29,7 @@ public class Sort {
 //			System.out.println("---");
 			Save.saveChunk(s, String.valueOf(n));
 			n++;
-			if (n>=10) break;
+			if ((n>0) && (n>=Start.MAXCHUNKS)) break;
 		}
 
 		Load.close();
