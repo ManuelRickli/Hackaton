@@ -7,6 +7,9 @@ import java.nio.file.Paths;
  */
 public class Merge {
 
+	private static int layer = 1;
+	private static int n = 0;
+
 	/**
 	 * This method merges all the files in the tmp_chunks folder into one superfile.
 	 */
@@ -15,18 +18,18 @@ public class Merge {
 		File dir = new File(Start.FOLDER);
 		if (dir.exists() && dir.isDirectory()) {
 			File[] files;
-			int n=1;
-			// TODO: Known bug! file name length is an issue with more than 10 chunks to start with!!!
+			boolean merged = false;
 			do {
 				files = dir.listFiles();
 
 				if (files.length > 1) {
-					mergeLayer(files, n);
-					n++;
+					merged = mergeLayer(files);
+					layer++;
+					n = 0;
 				} else {
 					files = null;
 				}
-			} while (files != null);
+			} while (merged && (files != null));
 		}
 
 	}
@@ -34,51 +37,58 @@ public class Merge {
 	/**
 	 * Merge a "layer" of files with - if possible - the same name length.
 	 * @param files files in dir to merge.
-	 * @param n the length of the file name.
 	 */
-	private static void mergeLayer(File[] files, int n) {
+	private static boolean mergeLayer(File[] files) {
 		File fa = null;
 		File fb = null;
+		boolean merged = false;
 		int f = files.length;
 		for (File file : files) {
-			if (file.getName().length() == n) {
+			if (FileNamer.getLayer(file.getName()) == layer) {
 				if (fa == null) {
 					fa = file;
 				} else {
 					fb = file;
 
-					merge(fa.getPath(),fb.getPath());
+					merge(fa.getName(),fb.getName());
 					f -= 2;
 					fa = null;
 					fb = null;
+					merged = true;
 				}
 			}
 		}
 		if (f>0) {
+			int dist = -1;
 			for (File file : files) {
 				if (file.exists() && file != fa) {
-					if (Math.abs(file.getName().length()-n) <= n) {
+					int d = Math.abs(FileNamer.getLayer(file.getName())-layer);
+					if ((dist == -1) || (d < dist)) {
 						fb = file;
-						break;
+						dist = d;
 					}
 				}
 			}
 			if ((fa != null) && (fb != null)) {
-				merge(fa.getPath(),fb.getPath());
+				merge(fa.getName(),fb.getName());
+				merged = true;
 			}
 		}
+		return merged;
 	}
 
 	private static void merge(String sa, String sb) {
-		String con = sa.concat(sb).replaceAll("\\D", "");
+		String con = FileNamer.getName(sa).concat(FileNamer.getName(sb)).replaceAll("\\D", "");
 
 		String s1;
 		String s2;
+		System.out.println("merge "+sa+" and "+sb);
 
 		try {
-			BufferedReader b1 = new BufferedReader(new FileReader(sa));
-			BufferedReader b2 = new BufferedReader(new FileReader(sb));
-			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+con));
+			BufferedReader b1 = new BufferedReader(new FileReader(Start.FOLDER+File.separator+sa));
+			BufferedReader b2 = new BufferedReader(new FileReader(Start.FOLDER+File.separator+sb));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+FileNamer.getFileName(layer+1,n)));
+			n++;
 
 			try {
 				s1 = b1.readLine();
@@ -109,8 +119,8 @@ public class Merge {
 				bufferedWriter.close();
 
 				try {
-					Files.delete(Paths.get(sa));
-					Files.delete(Paths.get(sb));
+					Files.delete(Paths.get(Start.FOLDER+File.separator+sa));
+					Files.delete(Paths.get(Start.FOLDER+File.separator+sb));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

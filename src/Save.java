@@ -13,7 +13,7 @@ public class Save {
 	 * @param chunk the (hopefully) sorted array to save.
 	 * @param n the name of the file.
 	 */
-	public static void saveChunk(String[] chunk,String n) {
+	public static void saveChunk(String[] chunk,int n) {
 		if (chunk!=null) {
 			try {
 				File folder = new File(Start.FOLDER);
@@ -23,7 +23,7 @@ public class Save {
 					} catch (Exception e) {}
 				}
 
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+n));
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+FileNamer.getFileName(1,n)));
 
 				if (bufferedWriter != null) {
 					for (String s : chunk) {

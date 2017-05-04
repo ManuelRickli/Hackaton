@@ -27,7 +27,7 @@ public class Sort {
 //				System.out.println(str);
 //			}
 //			System.out.println("---");
-			Save.saveChunk(s, String.valueOf(n));
+			Save.saveChunk(s, n);
 			n++;
 			if ((n>0) && (n>=Start.MAXCHUNKS)) break;
 		}
