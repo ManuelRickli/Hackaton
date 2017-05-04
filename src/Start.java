@@ -6,7 +6,8 @@ public class Start {
 	public static final String FOLDER = "tmp_chunks";
 	public static final int MAXINDEXSIZE = 3;
 	public static final int CHUNKSIZE = 10;//1000000
-	public static final int MAXCHUNKS = 20; // only for testing!
+	public static final int MAXCHUNKS = 20; // only for testing! may be set to 0 to disable
+	public static final int[] SCOPES = {1,3,2};
 
 	/**
 	 * Start this class to run the programm.
@@ -27,9 +28,7 @@ public class Start {
 
 		System.out.println("Done. It took "+(System.currentTimeMillis()-bench)+" milisecs");
 
-		Index root = new Index("",0,-1);
-
-		IndexBuilder.build(root);
+		Index root = IndexBuilder.createIndexTree();
 
 	}
 

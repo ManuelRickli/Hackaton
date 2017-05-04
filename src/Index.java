@@ -20,7 +20,24 @@ public class Index {
 		this.end = end;
 	}
 
+	/**
+	 * Adds the index to the children list.
+	 * @param i Index to add.
+	 */
+	public void add(Index i) {
+		if (children == null) children = new ArrayList<Index>();
+		children.add(i);
+	}
 
+	/**
+	 * Returns whether an Index is in this Indexes children list.
+	 * @param i Index to search for.
+	 * @return true if contained. false if not or children == null.
+	 */
+	public boolean contains(Index i) {
+		if (children != null) return children.contains(i);
+		return false;
+	}
 
 	///////////////////////////////////////////
 
