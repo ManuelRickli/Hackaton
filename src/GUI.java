@@ -22,9 +22,23 @@ public class GUI extends Application {
 		window.setTitle("Auto Completion GUi");
 
 		Label numberLeft = new Label("0");
-		numberLeft.setStyle("-fx-font-size: 20");
+		numberLeft.setStyle("-fx-font-size: 30");
 
-		Hyperlink[] suggestions = new Hyperlink[5];
+		Hyperlink suggestion1 = new Hyperlink("https://www.google.com");
+		suggestion1.setOnAction(e -> openURL(suggestion1.getText()));
+
+		Hyperlink suggestion2 = new Hyperlink("https://www.google.com");
+		suggestion2.setOnAction(e -> openURL(suggestion2.getText()));
+
+		Hyperlink suggestion3 = new Hyperlink("https://www.google.com");
+		suggestion3.setOnAction(e -> openURL(suggestion3.getText()));
+
+		Hyperlink suggestion4 = new Hyperlink("https://www.google.com");
+		suggestion4.setOnAction(e -> openURL(suggestion4.getText()));
+
+		Hyperlink suggestion5 = new Hyperlink("https://www.google.com");
+		suggestion5.setOnAction(e -> openURL(suggestion5.getText()));
+
 
 		TextField inputField = new TextField();
 		inputField.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -34,8 +48,9 @@ public class GUI extends Application {
 
 		VBox pane = new VBox(15);
 		pane.setPadding(new Insets(15, 15, 15, 15));
+		pane.setMinWidth(300);
 
-		pane.getChildren().addAll(numberLeft, inputField, suggestions[0], suggestions[1], suggestions[2], suggestions[3], suggestions[4]);
+		pane.getChildren().addAll(numberLeft, inputField, suggestion1, suggestion2, suggestion3, suggestion4, suggestion5);
 
 		Scene scene = new Scene(pane);
 		window.setScene(scene);
