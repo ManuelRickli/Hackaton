@@ -4,7 +4,7 @@
 public class Start {
 
 	public static final String FOLDER = "tmp_chunks";
-	public static final int MAXINDEXSIZE = 3;
+	public static final int MAXINDEXSIZE = 1000;
 	public static final int CHUNKSIZE = 1000000;
 	public static final int PREFIXLENGTH = 4;
 	public static final int MAXCHUNKS = 0; // only for testing! may be set to 0 to disable
@@ -12,7 +12,7 @@ public class Start {
 
 	public static String mode = "index";
 	public static String path = "";
-	public static String file = "sorted";
+	public static String file = "test";
 
 	/**
 	 * Start this class to run the programm.
@@ -24,17 +24,18 @@ public class Start {
 		if (args != null) {
 			if (args.length > 0) {
 				mode = args[0];
-				System.out.println("mode: "+mode);
 			}
 			if (args.length > 1) {
 				path = args[1];
-				System.out.println("path: "+path);
 			}
 			if (args.length > 2) {
 				file = args[2];
-				System.out.println("file: "+file);
 			}
 		}
+
+		System.out.println("mode: "+mode);
+		System.out.println("path: "+path);
+		System.out.println("file: "+file);
 
 		long bench = System.currentTimeMillis();
 

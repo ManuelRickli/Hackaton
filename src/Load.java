@@ -10,12 +10,11 @@ public class Load {
 
 	/**
 	 * This method initializes the reading of the big data.
-	 * @param path path of file to read
 	 * @return false if something went wrong
 	 */
 	public static boolean initialize() {
 
-		File file = new File(Start.path);
+		File file = new File(Start.path+Start.file);
 
 		if (file.exists() && file.isFile()) {
 			try {
