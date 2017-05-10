@@ -13,13 +13,13 @@ public class Load {
 	 * @param path path of file to read
 	 * @return false if something went wrong
 	 */
-	public static boolean initialize(String path) {
+	public static boolean initialize() {
 
-		File file = new File(path);
+		File file = new File(Start.path);
 
 		if (file.exists() && file.isFile()) {
 			try {
-				bufferedReader = new BufferedReader(new FileReader(path));
+				bufferedReader = new BufferedReader(new FileReader(Start.path+Start.file));
 			} catch (FileNotFoundException e) {
 				return false;
 			}

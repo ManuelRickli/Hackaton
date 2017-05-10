@@ -15,7 +15,7 @@ public class Merge {
 	 */
 	public static void mergeAll() {
 
-		File dir = new File(Start.FOLDER);
+		File dir = new File(Start.path+Start.FOLDER);
 		if (dir.exists() && dir.isDirectory()) {
 			File[] files;
 			boolean merged = false;
@@ -85,9 +85,9 @@ public class Merge {
 		System.out.println("merge "+sa+" and "+sb);
 
 		try {
-			BufferedReader b1 = new BufferedReader(new FileReader(Start.FOLDER+File.separator+sa));
-			BufferedReader b2 = new BufferedReader(new FileReader(Start.FOLDER+File.separator+sb));
-			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.FOLDER+ File.separator+FileNamer.getFileName(layer+1,n)));
+			BufferedReader b1 = new BufferedReader(new FileReader(Start.path+Start.FOLDER+File.separator+sa));
+			BufferedReader b2 = new BufferedReader(new FileReader(Start.path+Start.FOLDER+File.separator+sb));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(Start.path+Start.FOLDER+ File.separator+FileNamer.getFileName(layer+1,n)));
 			n++;
 
 			try {
@@ -119,8 +119,8 @@ public class Merge {
 				bufferedWriter.close();
 
 				try {
-					Files.delete(Paths.get(Start.FOLDER+File.separator+sa));
-					Files.delete(Paths.get(Start.FOLDER+File.separator+sb));
+					Files.delete(Paths.get(Start.path+Start.FOLDER+File.separator+sa));
+					Files.delete(Paths.get(Start.path+Start.FOLDER+File.separator+sb));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

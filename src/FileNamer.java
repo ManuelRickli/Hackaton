@@ -14,7 +14,7 @@ public class FileNamer {
 	public static String getFileName(int layer, int n) {
 		String name = "";
 		name = String.valueOf(layer);
-		while (name.length()<3) {
+		while (name.length()<Start.PREFIXLENGTH) {
 			name = "0"+name;
 		}
 		name = name + String.valueOf(n);
@@ -30,7 +30,7 @@ public class FileNamer {
 	public static String getFileName(int layer, String n) {
 		String name = "";
 		name = String.valueOf(layer);
-		while (name.length()<3) {
+		while (name.length()<Start.PREFIXLENGTH) {
 			name = "0"+name;
 		}
 		name = name + n;
@@ -44,7 +44,7 @@ public class FileNamer {
 	 */
 	public static int getLayer(String name) {
 		int n = 0;
-		n = Integer.parseInt(name.substring(0,3));
+		n = Integer.parseInt(name.substring(0,Start.PREFIXLENGTH));
 		return n;
 	}
 
@@ -54,7 +54,7 @@ public class FileNamer {
 	 * @return name of file without merge-layer.
 	 */
 	public static String getName(String file) {
-		return file.substring(3);
+		return file.substring(Start.PREFIXLENGTH);
 	}
 
 }

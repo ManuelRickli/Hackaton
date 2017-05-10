@@ -14,9 +14,9 @@ public class Sort {
 	 *
 	 * @param path the path of the file with the unsorted big data.
 	 */
-	public static void sort(String path) {
+	public static void sort() {
 
-		Load.initialize(path);
+		Load.initialize();
 
 		String[] s;
 		int n = 0;
@@ -29,7 +29,7 @@ public class Sort {
 //			System.out.println("---");
 			Save.saveChunk(s, n);
 			n++;
-			if ((n>0) && (n>=Start.MAXCHUNKS)) break;
+			if ((Start.MAXCHUNKS>0) && ((n>=Start.MAXCHUNKS))) break;
 		}
 
 		Load.close();

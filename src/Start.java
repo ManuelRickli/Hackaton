@@ -5,9 +5,14 @@ public class Start {
 
 	public static final String FOLDER = "tmp_chunks";
 	public static final int MAXINDEXSIZE = 3;
-	public static final int CHUNKSIZE = 10;//1000000
-	public static final int MAXCHUNKS = 20; // only for testing! may be set to 0 to disable
+	public static final int CHUNKSIZE = 1000000;
+	public static final int PREFIXLENGTH = 4;
+	public static final int MAXCHUNKS = 0; // only for testing! may be set to 0 to disable
 	public static final int[] SCOPES = {1,3,2};
+
+	public static String mode = "index";
+	public static String path = "";
+	public static String file = "sorted";
 
 	/**
 	 * Start this class to run the programm.
@@ -16,19 +21,40 @@ public class Start {
 	 */
 	public static void main(String[] args) {
 
-		String path = "urls/urls-sample.txt";
-
-		if ((args != null) && (args.length > 0)) path = args[0];
-
-		System.out.println("Creating chunks...");
+		if (args != null) {
+			if (args.length > 0) {
+				mode = args[0];
+				System.out.println("mode: "+mode);
+			}
+			if (args.length > 1) {
+				path = args[1];
+				System.out.println("path: "+path);
+			}
+			if (args.length > 2) {
+				file = args[2];
+				System.out.println("file: "+file);
+			}
+		}
 
 		long bench = System.currentTimeMillis();
 
-		Sort.sort(path);
+		if (mode.equals("sort")) {
+
+			System.out.println("Creating chunks...");
+			Sort.sort();
+
+		} else if (mode.equals("index")) {
+
+			Index root = IndexBuilder.createIndexTree();
+
+		} else {
+
+			System.out.println("unknown mode: "+mode);
+			System.out.println("Please chose 'sort' or 'index'.");
+
+		}
 
 		System.out.println("Done. It took "+(System.currentTimeMillis()-bench)+" milisecs");
-
-		Index root = IndexBuilder.createIndexTree();
 
 	}
 
