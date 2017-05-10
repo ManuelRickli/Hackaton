@@ -7,6 +7,7 @@ public class Index {
 
 	private String node;
 	private int start,end;
+	private long byteStart;
 
 	private ArrayList<Index> children;
 
@@ -14,7 +15,7 @@ public class Index {
 	 * Index is the tree data structure that will be used to determine the approximate destination of your required link.
 	 * Also helps with finding out how many links there actually are.
 	 */
-	public Index(String node, int start, int end) {
+	public Index(String node, int start, int end, long byteStart) {
 		this.node = node;
 		this.start = start;
 		this.end = end;
@@ -39,6 +40,15 @@ public class Index {
 		return false;
 	}
 
+	public void print(String pre) {
+		System.out.println("I:"+pre+node+" - "+start+","+end);
+		if (children != null) {
+			for (Index sub : children) {
+				sub.print(pre+node);
+			}
+		}
+	}
+
 	///////////////////////////////////////////
 
 	public String getNode() {
@@ -60,6 +70,13 @@ public class Index {
 	}
 	public void setEnd(int end) {
 		this.end = end;
+	}
+
+	public long getByteStart() {
+		return byteStart;
+	}
+	public void setByteStart(long byteStart) {
+		this.byteStart = byteStart;
 	}
 
 	public ArrayList<Index> getChildren() {

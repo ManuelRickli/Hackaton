@@ -4,11 +4,12 @@
 public class Start {
 
 	public static final String FOLDER = "tmp_chunks";
-	public static final int MAXINDEXSIZE = 1000;
+	public static final int MAXINDEXSIZE = 5;
 	public static final int CHUNKSIZE = 1000000;
 	public static final int PREFIXLENGTH = 4;
 	public static final int MAXCHUNKS = 0; // only for testing! may be set to 0 to disable
-	public static final int[] SCOPES = {1,3,2};
+	public static final int SCOPE = 2;
+	public static final int BYTESPERCHAR = 1;
 
 	public static String mode = "index";
 	public static String path = "";
@@ -46,7 +47,10 @@ public class Start {
 
 		} else if (mode.equals("index")) {
 
+			System.out.println("Creating indizes...");
 			Index root = IndexBuilder.createIndexTree();
+
+			root.print("R");
 
 		} else {
 
